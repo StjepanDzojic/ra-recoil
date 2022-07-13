@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import React, { useState } from "react";
+import { useSetRecoilState } from "recoil";
 import { configuratorAtoms } from "./state";
 
 export const Discount: React.FC = () => {
   const [discount, setDiscount] = useState(0);
-  const [discountState, setDiscountState] = useRecoilState(
-    configuratorAtoms.discount
-  );
+  const setDiscountState = useSetRecoilState(configuratorAtoms.discount);
   const [discountMessage, setDiscountMessage] = useState(false);
 
-  useEffect(() => {
-    setDiscount(0);
-  }, [discountState]);
   function addDiscount() {
     setDiscountState(discount);
     setDiscountMessage(true); //indicator of applied Discount
@@ -33,7 +28,7 @@ export const Discount: React.FC = () => {
         id="discount"
       />
       <button onClick={addDiscount}>Add discount</button>
-      <p>{discountMessage && "Discount added!"}</p>
+      <p style={{ height: "16px" }}>{discountMessage && "Discount added!"}</p>
     </section>
   );
 };
