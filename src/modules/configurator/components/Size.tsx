@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { configuratorAtoms } from "./state";
 
 export const Size: React.FC = () => {
-  const [size, setSize] = useState<number>(10);
-  const setPizzaSize = useSetRecoilState<number>(configuratorAtoms.size);
+  const setPizzaSize = useSetRecoilState(configuratorAtoms.size);
   const resetPizzaDiscount = useResetRecoilState(configuratorAtoms.discount);
-
-  useEffect(() => {
-    setPizzaSize(size);
-    resetPizzaDiscount();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [size]);
 
   return (
     <section>
@@ -20,7 +13,8 @@ export const Size: React.FC = () => {
         type="radio"
         value={7}
         onClick={() => {
-          setSize(7);
+          setPizzaSize(7);
+          resetPizzaDiscount();
         }}
         id="s"
         name="size"
@@ -30,7 +24,8 @@ export const Size: React.FC = () => {
         type="radio"
         value={10}
         onClick={() => {
-          setSize(10);
+          setPizzaSize(10);
+          resetPizzaDiscount();
         }}
         id="m"
         name="size"
@@ -41,7 +36,8 @@ export const Size: React.FC = () => {
         type="radio"
         value={13}
         onClick={() => {
-          setSize(13);
+          setPizzaSize(13);
+          resetPizzaDiscount();
         }}
         id="l"
         name="size"

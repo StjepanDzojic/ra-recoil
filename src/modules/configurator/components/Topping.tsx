@@ -4,25 +4,23 @@ import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { configuratorAtoms } from "./state";
 
 export const Topping: React.FC<ToppingsInfo> = ({ name, price }) => {
-  const [checked, setChecked] = useState<boolean>(false);
-  const setTopping = useSetRecoilState<ToppingsInfo[]>(
-    configuratorAtoms.toppings
-  );
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const setTopping = useSetRecoilState(configuratorAtoms.toppings);
   const resetPizzaDiscount = useResetRecoilState(configuratorAtoms.discount);
 
   useEffect(() => {
-    if (checked) {
+    if (isChecked) {
       //adding
       setTopping((currentState) => [...currentState, { name, price }]);
     } else {
       //removing
       setTopping((currentState) =>
-        currentState.filter((ToppingsInfo) => ToppingsInfo.name !== name)
+        currentState.filter((topping) => topping.name !== name)
       );
     }
     resetPizzaDiscount();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checked]);
+  }, [isChecked]);
 
   return (
     <li>
@@ -32,11 +30,11 @@ export const Topping: React.FC<ToppingsInfo> = ({ name, price }) => {
       <input
         type="checkbox"
         onChange={() => {
-          setChecked(!checked);
+          setIsChecked(!isChecked);
         }}
         name={name}
         id={name}
-        checked={checked}
+        checked={isChecked}
       />
     </li>
   );

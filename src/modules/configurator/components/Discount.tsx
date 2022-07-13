@@ -18,6 +18,7 @@ export const Discount: React.FC = () => {
     setTimeout(() => {
       setDiscountMessage(false);
     }, 5000);
+    setDiscount(0);
   }
   return (
     <section>
@@ -32,7 +33,7 @@ export const Discount: React.FC = () => {
         id="discount"
       />
       <button onClick={addDiscount}>Add discount</button>
-      {discountMessage && "Discount added!"}
+      <p>{discountMessage && "Discount added!"}</p>
     </section>
   );
 };

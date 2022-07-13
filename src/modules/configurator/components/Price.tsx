@@ -3,9 +3,7 @@ import { useRecoilValue } from "recoil";
 import { configuratorSelectors } from "./state";
 
 export const Price: React.FC = () => {
-  const totalPrice = useRecoilValue<number>(
-    configuratorSelectors.pizzaTotalPriceState
-  );
+  const totalPrice = useRecoilValue(configuratorSelectors.pizzaTotalPriceState);
 
   return (
     <section>
